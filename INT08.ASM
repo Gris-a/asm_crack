@@ -19,8 +19,9 @@ CustomInt08:
 	push ax bx si
 
 	mov si, offset password	; randomize password
+
+    mov ax, cs:prng_state
     REPT pass_len
-        mov ax, cs:prng_state
         mov bx, ax
         shl bx, 7h
         xor ax, bx
@@ -32,18 +33,19 @@ CustomInt08:
         mov bx, ax
         shl bx, 8h
         xor ax, bx
-        mov cs:prng_state, ax
 
-        shr al, 4h
-        add al, 61h
-        mov cs:[si], al
+        mov bx, ax
+        shr bl, 4h
+        add bl, 61h
+        mov cs:[si], bl
     	inc si
     ENDM
+    mov cs:prng_state, ax
 
 	mov al, 20h
 	out 20h, al
 
-	pop cx bx ax
+	pop si bx ax
 	iret
 ; -----------------------------------------------
 my_int08	endp

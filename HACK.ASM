@@ -19,6 +19,9 @@ pass_len	equ 8
 org 100h
 ; ===============================================
 Start:
+	mov ah, 2ch		; set init prng_state on time depended
+	int 21h
+	add prng_state, dx
 ; -----------------------------------------------
 	mov ax, 3508h		; load int 08h address
 	int 21h
@@ -73,9 +76,9 @@ verification	proc
 ; -----------------------------------------------
 	sub sp, 0bh		; get place in stack for password
 	mov bx, sp
-	mov byte ptr [bx], 80h	; !WARNING! load password max size
+	mov byte ptr [bx], 80h	; load password max size
 ; -----------------------------------------------
-	mov si, bx		; !WARNING! load ds:si = input address
+	mov si, bx		; load ds:si = input address
 	add si, 2
 
 	mov di, ds		; load es:di = password address
