@@ -73,4 +73,6 @@
 
 ## C cracking
 
-Также в папке `cracking_means` представлена программа на `C`, которая переводит `PASSW_origin.COM` в `PASSW_patched.COM`, напрямую меняя машинный код.
+Также в папке `cracking_means` представлена программа на `C`, которая переводит `PASSW_origin.COM` в `PASSW_patched.COM`, напрямую меняя машинный код. Для компиляции нужна библиотека [SFML](https://www.sfml-dev.org/index.php). Сборка:
+`
+g++ hack.cpp -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-system`.
